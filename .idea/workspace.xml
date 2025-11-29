@@ -5,23 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0fcf5cc-53fe-4747-933d-d2cdf7533fdf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/test_data.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/framework/data_driver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/framework/driver_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/framework/keyword_engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jenkins/Jenkinsfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/base_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/dashboard_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/login_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_dashboard.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_login.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/element_locator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/report_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REMADE.md" beforeDir="false" afterPath="$PROJECT_DIR$/REMADE.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
