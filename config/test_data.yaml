@@ -1,0 +1,58 @@
+# config/test_data.yaml
+# 测试数据配置文件
+
+# 登录测试数据
+login_test_data:
+  valid_credentials:
+    - username: "testuser@example.com"
+      password: "password123"
+      expected_result: "success"
+    - username: "admin@example.com"
+      password: "admin123"
+      expected_result: "success"
+
+  invalid_credentials:
+    - username: "invalid@example.com"
+      password: "wrongpass"
+      expected_result: "failure"
+    - username: ""
+      password: ""
+      expected_result: "failure"
+
+# 页面元素定位数据
+page_elements:
+  login_page:
+    username_input:
+      - {type: "id", value: "username"}
+      - {type: "name", value: "email"}
+      - {type: "css", value: "input[type='email']"}
+    password_input:
+      - {type: "id", value: "password"}
+      - {type: "name", value: "password"}
+      - {type: "css", value: "input[type='password']"}
+    login_button:
+      - {type: "id", value: "loginBtn"}
+      - {type: "xpath", value: "//button[contains(text(), 'Login')]"}
+      - {type: "css", value: "button.login-button"}
+
+  dashboard_page:
+    welcome_message:
+      - {type: "xpath", value: "//h1[contains(text(), 'Welcome')]"}
+      - {type: "css", value: ".welcome-message"}
+    logout_button:
+      - {type: "id", value: "logout"}
+      - {type: "css", value: "button.logout-btn"}
+
+# 测试场景数据
+test_scenarios:
+  login_flow:
+    - action: "open_login_page"
+      data: {url: "/login"}
+    - action: "fill_username"
+      data: {value: "testuser@example.com"}
+    - action: "fill_password"
+      data: {value: "password123"}
+    - action: "click_login"
+      data: {}
+    - action: "verify_login_success"
+      data: {expected_text: "Welcome"}
