@@ -1,0 +1,114 @@
+// jenkins/Jenkinsfile
+pipeline {
+    agent any
+
+    tools {
+        jdk 'JDK-8'
+        python 'Python-3.8'
+    }
+
+    environment {
+        PYTHONPATH = "${WORKSPACE}"
+        ALLURE_RESULTS = "${WORKSPACE}/reports/allure-results"
+        ALLURE_REPORT = "${WORKSPACE}/reports/allure-report"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your-repo/web-automation-platform.git'
+            }
+        }
+
+        stage('Setup Environment') {
+            steps {
+                script {
+                    sh 'python -m venv venv'
+                    sh 'source venv/bin/activate && pip install --upgrade pip'
+                    sh 'source venv/bin/activate && pip install -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Dependency Check') {
+            steps {
+                script {
+                    sh 'source venv/bin/activate && pip check'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            parallel {
+                stage('Login Tests') {
+                    steps {
+                        script {
+                            sh 'source venv/bin/activate && pytest tests/test_login.py -v --alluredir=${ALLURE_RESULTS}'
+                        }
+                    }
+                }
+                stage('Dashboard Tests') {
+                    steps {
+                        script {
+                            sh 'source venv/bin/activate && pytest tests/ -k "not test_login" -v --alluredir=${ALLURE_RESULTS}'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Generate Allure Report') {
+            steps {
+                script {
+                    sh 'allure generate ${ALLURE_RESULTS} -o ${ALLURE_REPORT} --clean'
+                }
+            }
+        }
+
+        stage('Publish Test Results') {
+            steps {
+                script {
+                    publishTestResults testResultsPattern: 'reports/**/*.xml'
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'reports/allure-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Allure Report'
+                    ])
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                // 清理测试环境
+                sh 'rm -rf venv'
+                sh 'find . -type f -name "*.pyc" -delete'
+                sh 'find . -type d -name "__pycache__" -delete'
+            }
+        }
+        success {
+            script {
+                echo "✅ 测试执行成功！"
+                currentBuild.description = "✅ Success - Tests passed: ${env.BUILD_NUMBER}"
+            }
+        }
+        failure {
+            script {
+                echo "❌ 测试执行失败！"
+                currentBuild.description = "❌ Failed - Tests failed: ${env.BUILD_NUMBER}"
+
+                // 发送通知
+                emailext (
+                    subject: "Jenkins自动化测试失败 - ${env.JOB_NAME}",
+                    body: "构建 #${env.BUILD_NUMBER} 失败\n\n项目: ${env.JOB_NAME}\nURL: ${env.BUILD_URL}",
+                    to: "qa-team@example.com"
+                )
+            }
+        }
+    }
+}

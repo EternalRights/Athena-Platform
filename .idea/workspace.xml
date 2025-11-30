@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a0fcf5cc-53fe-4747-933d-d2cdf7533fdf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REMADE.md" beforeDir="false" afterPath="$PROJECT_DIR$/REMADE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jenkins/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/jenkins/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_login.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,5 +57,8 @@
       <updated>1764322635953</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="Jenkinsfile" />
   </component>
 </project>
